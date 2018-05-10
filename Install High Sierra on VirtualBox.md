@@ -40,3 +40,11 @@ VBoxManage setextradata %VM% "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSM
 
 pause
 ```
+
+# After installation 
+It seems a good idea to disable TRIM after system boot. The new OS stuck at "HID legacy shim 2" for very long time when I rebooted it for the first time. Below command works so far as I collected. 
+```
+sudo trimforce disable
+```
+The computer will automatically reboot after the command succeeds. 
+
