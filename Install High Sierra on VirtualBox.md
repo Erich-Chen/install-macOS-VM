@@ -7,7 +7,7 @@ https://techsviewer.com/install-macos-high-sierra-virtualbox-windows/
 
 To make it even faster, I created a batch script to finish all the jobs with just one-click.  
 1. Save below script as "InstallMacOS.bat";  
-2. Find the image at https://techsviewer.com/install-macos-sierra-virtualbox-windows/ and download it;  
+2. Find the image at https://techsviewer.com/install-macos-high-sierra-virtualbox-windows/ and download it;  
 3. Put the batch script and vm image at same directory;  
 4. Run the script as Adminitrator;  
 5. Open your VirtualBox to find a new VM named "macOS 10.12 Sierra"  
