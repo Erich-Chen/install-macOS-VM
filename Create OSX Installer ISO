@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+# Create OSX Installer ISO.
+# 2017 robertoschwald 
+# Copied from robertoschwald gits:  
+# https://gist.github.com/robertoschwald/7f9eadf78739128ea1fb7a32c0472e1c
+
+installer_path=/Applications/Install\ macOS\ High\ Sierra.app
+installer_mountpoint=/Volumes/Install\ macOS\ High\ Sierra
+
+echo "Creating Install ISO"
+
+if [ ! -d "${installer_path}" ]; then
+	echo "Please download OSX to ${installer_path} from Appstore, first"
+	exit 1
+fi
+
+echo "Are you sure?"
+read yn
+if [ ${yn} != "y" ]; then
+	echo "Aborting."
+	exit 1
+fi
+
+echo " "
+echo "Creating temporary install DMG file.."
+hdiutil create -o /tmp/HighSierra.cdr -size 5130m -layout SPUD -fs HFS+J
+if [ ! -f /tmp/HighSierra.cdr.dmg ]; then
+	echo "Failed to create temporary DMG file /tmp/HighSierra.cdr.dmg"
+	exit 1
+fi
+
+echo " "
+echo "Mounting /tmp/HighSierra.cdr.dmg"
+hdiutil attach /tmp/HighSierra.cdr.dmg -noverify -mountpoint /Volumes/install_build
+if [ $? != 0 ]; then
+	echo "Failed to mount temporary DMG file /tmp/HighSierra.cdr.dmg"
+	exit 1
+fi
+
+echo " "
+echo "Creating install DMG"
+sudo "${installer_path}"/Contents/Resources/createinstallmedia --volume /Volumes/install_build
+if [ ! -f /tmp/HighSierra.cdr.dmg ]; then
+	echo "Failed to find /tmp/HighSierra.cdr.dmg"
+	exit 1
+fi
+
+if [ -d "${installer_mountpoint}" ]; then
+	echo "Unmounting ${installer_mountpoint}"
+	umount "${installer_mountpoint}"
+	if [ $? != 0 ]; then
+		echo "Failed to unmount installer mount point ${installer_mountpoint}"
+		exit 1
+	fi
+	sleep 3
+fi
+
+echo " "
+echo "Moving dmg to ~/Desktop/InstallSystem.dmg"
+cp /tmp/HighSierra.cdr.dmg ~/Desktop/InstallSystem.dmg # copy, not mv, as some process could have locked the file
+rm -rf /tmp/HighSierra.cdr.dmg
+
+echo " "
+echo "Convert ~/Desktop/InstallSystem.dmg to HighSierra.iso"
+hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/HighSierra.iso
+if [ ! -f ~/Desktop/HighSierra.iso.cdr ]; then
+	echo "Failed to create ~/Desktop/HighSierra.iso.cdr"
+	exit 1
+fi
+
+mv ~/Desktop/HighSierra.iso.cdr ~/Desktop/HighSierra.iso
+
+if [ -f ~/Desktop/InstallSystem.dmg ]; then
+	rm ~/Desktop/InstallSystem.dmg
+fi
+
+echo "You find the iso on ~/Desktop/HighSierra.iso"
