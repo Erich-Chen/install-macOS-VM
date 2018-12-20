@@ -42,14 +42,5 @@ pause
 ```
 
 # After installation 
-~~It seems a good idea to disable TRIM after system boot. The new OS stuck at "HID legacy shim 2" for very long time when I rebooted it for the first time. Below command works so far as I collected. ~~
-```
-sudo trimforce disable
-```
-~~The computer will automatically reboot after the command succeeds. ~~
-
-
-Not sure about it.... Maybe just be patient and wait for 15+ minutes if encouter boot stucking. 
-
-Download and double click to install if failed to install update 10.13.4 in app store.  
+Mouse and Keyboard no respond by now. checking... 
 
