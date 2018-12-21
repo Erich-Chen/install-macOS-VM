@@ -42,5 +42,8 @@ pause
 ```
 
 # After installation 
-Mouse and Keyboard no respond by now. checking... 
-
+Mouse and Keyboard no respond problem:
+as my experience, two points to check:
+1. `VBoxManage modifyvm %VM% --mouse usbtablet --keyboard usb`
+2. Add a new usb filter: Settings -> USB -> the first icon on the lower right. 
+`VBoxManage usbfilter add ???` (TBD)
