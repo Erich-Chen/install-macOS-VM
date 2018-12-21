@@ -43,7 +43,7 @@ pause
 
 # After installation 
 Mouse and Keyboard no respond problem:
-as my experience, two points to check:
+as my experience, Guest Additions, USB 3.0 and USB filter seems help. 
 1. `VBoxManage modifyvm %VM% --mouse usbtablet --keyboard usb`
 2. Add a new usb filter: Settings -> USB -> the first icon on the lower right. 
 `VBoxManage usbfilter add ???` (TBD)
