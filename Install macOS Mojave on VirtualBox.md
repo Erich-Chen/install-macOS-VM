@@ -47,3 +47,11 @@ as my experience, two points to check:
 1. `VBoxManage modifyvm %VM% --mouse usbtablet --keyboard usb`
 2. Add a new usb filter: Settings -> USB -> the first icon on the lower right. 
 `VBoxManage usbfilter add ???` (TBD)
+3. Possible help to enable pointer capture but disable mouse integration (MI). 
+
+ref.
+Enable USB3.0 and USB mouse / keyboard: 
+  https://techsviewer.com/how-to-install-virtualbox-extension-pack-and-enable-usb-3-0/ 
+
+Enable full screen:
+  https://techsviewer.com/how-to-enter-full-screen-mode-macos-virtualbox/ 
