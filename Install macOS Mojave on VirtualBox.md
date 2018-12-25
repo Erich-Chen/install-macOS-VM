@@ -47,15 +47,9 @@ VBoxManage setextradata %VM% VBoxInternal2/EfiGraphicsResolution 1366x768
 pause
 ```
 
-# After installation 
-Mouse and Keyboard no respond problem:
-as my experience, Guest Additions, USB 3.0 and USB filter seems help. 
-1. `VBoxManage modifyvm %VM% --mouse usbtablet --keyboard usb`
-2. Add a new usb filter: Settings -> USB -> the first icon on the lower right. 
-`VBoxManage usbfilter add ???` (TBD)
-3. Possible help to enable pointer capture but disable mouse integration (MI). 
+# ref. 
+https://techsviewer.com/install-macos-10-14-mojave-virtualbox-windows/ 
 
-ref.
 Enable USB3.0 and USB mouse / keyboard: 
   https://techsviewer.com/how-to-install-virtualbox-extension-pack-and-enable-usb-3-0/ 
 
