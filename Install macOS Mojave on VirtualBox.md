@@ -8,7 +8,8 @@ https://techsviewer.com/install-macos-10-14-mojave-virtualbox-windows/
 To make it even faster, I created a batch script to finish all the jobs with just one-click.  
 1. Save below script as "InstallMacOS.bat";  
 2. Find the image at https://techsviewer.com/install-macos-high-sierra-virtualbox-windows/ and download it;  
-3. Put the batch script and vm image at same directory;  
+unarchive the image and rename to `macOS Mojave.vmdk`. 
+3. Put the batch script and vm image at same directory (recommened to rename the folder as `macOS Mojave`;  
 4. Run the script as Adminitrator;  
 5. Open your VirtualBox to find a new VM named "macOS Mojave"  
 6. Enjoy!  
@@ -27,7 +28,9 @@ VBoxManage modifyvm %VM% --firmware efi --pae on --chipset ich9 --rtcuseutc on
 VBoxManage modifyvm %VM% --accelerate3d on
 
 REM it is important to set up mouse and keyboard to usb from default ps/2 to assure they work in guest system
+VBoxManage modifyvm %VM% --usbxhci on
 VBoxManage modifyvm %VM% --mouse usbtablet --keyboard usb
+VBoxManage usbfilter add 0 --target %VM% --name "USBFilter0" --action hold 
 
 VBoxManage modifyvm %VM% --boot1 disk --boot2 none --boot3 none --boot4 none
 
@@ -37,6 +40,9 @@ VBoxManage setextradata %VM% "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion
 VBoxManage setextradata %VM% "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
 VBoxManage setextradata %VM% "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
 VBoxManage setextradata %VM% "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
+
+REM Set up full screen resolution
+VBoxManage setextradata %VM% VBoxInternal2/EfiGraphicsResolution 1366x768
 
 pause
 ```
